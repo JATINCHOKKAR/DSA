@@ -1,0 +1,100 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class node{
+    public:
+    int data;
+    node * left;
+    node * right;
+    node(int data){
+        this->data=data;
+        left=NULL;
+        right=NULL;
+    }
+    
+};
+node * pointer=NULL;
+node * create_node(node * cur){
+    int val;
+    cin>>val;
+    node * temp=new node(val);
+    if(pointer==NULL){
+        pointer=temp;
+        return pointer;
+    }
+    else{
+        // cout<<"Yes ";
+        temp->left=cur;
+        cur->right=temp;
+        // pointer=pointer->right;
+        return temp;
+    }
+    
+}
+
+void insert_at_begin(){
+    int val;
+    cin>>val;
+    node * temp=new node(val);
+    if(pointer==NULL){
+        pointer=temp;
+    }
+    else{
+        pointer->left=temp;
+        temp->right=pointer;
+        pointer=temp;
+    }
+}
+node * insert_at_last(node * cur){
+    int val;
+    cin>>val;
+    node * temp=new node(val);
+    node * t=pointer;
+    while(t->right!=NULL){
+        t=t->right;
+    }
+    t->right=temp;
+    return temp;
+}
+// void insert_at_middle()
+void display(){
+    node * cur=pointer;
+    while(cur!=NULL){
+        cout<<cur->data;
+        cur=cur->right;
+    }
+}
+
+
+
+void reverse(){
+    
+node * cur=pointer,*prev=NULL,*next=NULL;
+while(cur!=NULL){
+    next=cur->right;
+    cur->right=prev;
+    cur->left=next;
+    prev=cur;
+    cur=next;
+}
+pointer=prev;
+    
+}
+
+int main(){
+    
+    node * cur=NULL;
+    
+    cur=create_node(cur);
+    cur=create_node(cur);
+    cur=create_node(cur);
+    cur=create_node(cur);
+    cur=create_node(cur);
+    insert_at_begin();
+    
+    cur=insert_at_last(cur);
+    display();
+    reverse();
+    display();
+    return 0;
+}
